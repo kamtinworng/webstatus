@@ -12,13 +12,13 @@ import {
   Title,
 } from "@mantine/core";
 import { useState } from "react";
-import { Chain, Root } from "./type";
+import { Chain } from "./type";
 import { notifications } from "@mantine/notifications";
 import Link from "next/link";
 
 export function Content() {
-  const [url, setURL] = useState<string | undefined>();
-  const [value, setValue] = useState<Root>();
+  const [url, setURL] = useState();
+  const [value, setValue] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   const myHeaders = new Headers();
@@ -86,13 +86,13 @@ export function Content() {
           ""
         ) : (
           <Accordion variant="filled" defaultValue={"result"}>
-            <Accordion.Item key="result" value={url as string}>
+            <Accordion.Item key="result" value={url }>
               <Accordion.Control>
                 <SimpleGrid cols={3}>
                   <div>
                     {
                       value.response.chain[value.response.chain.length - 1]
-                        .url as string
+                        .url
                     }
                   </div>
                   <div>
@@ -136,7 +136,7 @@ export function Content() {
                         {value.response === undefined
                           ? "ไม่พบแหล่งที่อยู่"
                           : value.response.chain.map(
-                              (element: Chain, key: number) => (
+                              (element, key) => (
                                 <Table.Tr key={key}>
                                   <Table.Td>
                                     <Badge
